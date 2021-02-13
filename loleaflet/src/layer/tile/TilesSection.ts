@@ -23,7 +23,7 @@ class TilesSection {
 	processingOrder: number = null;
 	drawingOrder: number = null;
 	zIndex: number = null;
-	interactable: boolean = false;
+	interactable: boolean = true;
 	sectionProperties: any = {};
 	map: any;
 	offscreenCanvases: Array<any> = new Array(0);
@@ -206,6 +206,13 @@ class TilesSection {
 		}
 	}
 
+	public onMouseWheel (point: Array<number>, delta: number, e: MouseEvent) {
+		// User wants to scroll the document. We will send this request to Scroll Section.
+		var section: any = this.containerObject.getSectionWithName(L.CSections.Scroll.name);
+		if (section)
+			section.onMouseWheel(point, delta, e);
+	}
+
 	public onMouseMove () {}
 	public onMouseDown () {}
 	public onMouseUp () {}
@@ -214,7 +221,6 @@ class TilesSection {
 	public onClick () {}
 	public onDoubleClick () {}
 	public onContextMenu () {}
-	public onMouseWheel () {}
 	public onLongPress () {}
 	public onMultiTouchStart () {}
 	public onMultiTouchMove () {}
