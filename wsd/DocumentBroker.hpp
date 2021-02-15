@@ -292,7 +292,7 @@ public:
     void joinThread();
 
     /// Notify that the load has completed
-    virtual void setLoaded();
+    virtual void setDownloaded();
 
     /// If not yet locked, try to lock
     bool attemptLock(const ClientSession& session, std::string& failReason);
@@ -959,7 +959,7 @@ public:
     void dispose() override;
 
     /// When the load completes - lets start saving
-    void setLoaded() override;
+    void setDownloaded() override;
 
     /// How many live conversions are running.
     static std::size_t getInstanceCount();

@@ -794,7 +794,7 @@ bool DocumentBroker::download(const std::shared_ptr<ClientSession>& session, con
 
     // Let's download the document now, if not downloaded.
     std::chrono::milliseconds getFileCallDurationMs;
-    if (!_storage->isLoaded())
+    if (!_storage->isDownloaded())
     {
         std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
         std::string localPath = _storage->downloadStorageFileToLocal(
@@ -1273,7 +1273,7 @@ void DocumentBroker::broadcastSaveResult(bool success, const std::string& result
                      ", \"result\": \"" + result + "\", \"errorMsg\": \"" + errorMsgFormatted  + "\"}");
 }
 
-void DocumentBroker::setLoaded()
+void DocumentBroker::setDownloaded()
 {
     if (!isLoaded())
     {
@@ -2529,7 +2529,7 @@ bool ConvertToBroker::startConversion(SocketDisposition &disposition, const std:
             std::vector<char> loadRequest(_load.begin(), _load.end());
             docBroker->_clientSession->handleMessage(loadRequest);
 
-            // Save is done in the setLoaded
+            // Save is done in the ConvertToBroker::setDownloaded.
         });
     return true;
 }
@@ -2560,9 +2560,9 @@ void ConvertToBroker::removeFile(const std::string &uriOrig)
         FileUtil::removeFile(dir);
 }
 
-void ConvertToBroker::setLoaded()
+void ConvertToBroker::setDownloaded()
 {
-    DocumentBroker::setLoaded();
+    DocumentBroker::setDownloaded();
 
     // FIXME: Check for security violations.
     Poco::Path toPath(getPublicUri().getPath());

@@ -196,9 +196,9 @@ public:
         _jailedFilePathAnonym = newPath;
     }
 
-    void setLoaded(bool loaded) { _isLoaded = loaded; }
+    void setDownloaded(bool loaded) { _isLoaded = loaded; }
 
-    bool isLoaded() const { return _isLoaded; }
+    bool isDownloaded() const { return _isLoaded; }
 
     /// Asks the storage object to force overwrite to storage upon next save
     /// even if document turned out to be changed in storage

@@ -1468,7 +1468,7 @@ bool ClientSession::handleKitToClientMessage(const char* buffer, const int lengt
         else if (tokens[0] == "status:")
         {
             setState(ClientSession::SessionState::LIVE);
-            docBroker->setLoaded();
+            docBroker->setDownloaded();
 
 #if !MOBILEAPP
             Admin::instance().setViewLoadDuration(docBroker->getDocKey(), getId(), std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - _viewLoadStart));
